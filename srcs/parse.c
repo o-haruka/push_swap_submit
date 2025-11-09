@@ -6,13 +6,15 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:08:18 by homura            #+#    #+#             */
-/*   Updated: 2025/11/08 18:24:25 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/09 19:00:02 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 #include "../libft/includes/libft.h"
 #include <stdlib.h>
+
+// コマンドライン引数を解析して整数配列に変換する役割。
 
 static int	get_split_size(char **split)
 {
@@ -48,10 +50,21 @@ static int	parse_args_split(char *arg, int **arr, int *size)
 	if (!split)
 		return (1);
 	*size = get_split_size(split);
-	if (*size == 0 || convert_split_to_array(split, arr, *size) == 1)
+	// if (*size == 0 || convert_split_to_array(split, arr, *size) == 1)
+	// {
+	// 	if (*size > 0)
+	// 		free(*arr);
+	// 	free_split_array(split);
+	// 	return (1);
+	// }
+	
+	if (*size == 0)
 	{
-		if (*size > 0)
-			free(*arr);
+		free_split_array(split);
+		return (1);
+	}
+	if (convert_split_to_array(split, arr, *size) == 1)
+	{
 		free_split_array(split);
 		return (1);
 	}

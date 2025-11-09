@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:20:00 by homura            #+#    #+#             */
-/*   Updated: 2025/11/08 18:38:22 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/09 21:46:35 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,12 @@ int	find_min_pos(t_node *a)
 	return (min_pos);
 }
 
-static void	move_min_to_top(t_node **a)
+static void	move_min_to_top(t_node **a, int sz)
 {
 	int	pos;
-	int	sz;
 	int	steps;
 
 	pos = find_min_pos(*a);
-	sz = list_size(*a);
 	if (pos == 0)
 		return ;
 	else if (pos <= sz / 2)
@@ -86,25 +84,27 @@ static void	move_min_to_top(t_node **a)
 	}
 }
 
-static void	sort_remaining(t_node **a)
+void	sort_small(t_node **a, t_node **b, int size)
 {
-	if (list_size(*a) == 2)
+	// サイズ5: 最小値2つを移動
+	if (size == 5)
 	{
-		if ((*a)->value > (*a)->next->value)
-			sa(a);
-	}
-	else if (list_size(*a) == 3)
-		sort_three(a);
-}
-
-void	sort_small(t_node **a, t_node **b)
-{
-	while (list_size(*a) > 3)
-	{
-		move_min_to_top(a);
+		move_min_to_top(a, size);
+		pb(a, b);
+		move_min_to_top(a, size - 1);  // 1つ移動後なのでサイズ-1
 		pb(a, b);
 	}
-	sort_remaining(a);
+	// サイズ4: 最小値1つを移動
+	else if (size == 4)
+	{
+		move_min_to_top(a, size);
+		pb(a, b);
+	}
+	
+	// 残った3要素をソート
+	sort_three(a);
+	
+	// スタックBの要素を戻す
 	while (*b)
 		pa(a, b);
 }

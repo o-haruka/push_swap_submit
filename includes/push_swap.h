@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:49:45 by homura            #+#    #+#             */
-/*   Updated: 2025/11/08 18:48:54 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/09 21:49:24 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	pa(t_node **a, t_node **b);
 
 // 小さいケース
 void	sort_three(t_node **a);
-void	sort_five(t_node **a, t_node **b);
-void	sort_small(t_node **a, t_node **b);
+void	sort_small(t_node **a, t_node **b, int size);
 int		find_min_pos(t_node *a);
 
 // Radix sort

@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:52:53 by homura            #+#    #+#             */
-/*   Updated: 2025/11/08 18:15:05 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/09 21:23:01 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,19 @@ void	init_stack_a(t_node **a, int *arr, int size)
 // ソート処理を分岐して実行
 void	do_sort(t_node **a, t_node **b, int size)
 {
-	if (size == 1)
-	{
-	}
+	if (size <= 1)
+		return ;
 	else if (size == 2)
 	{
 		if ((*a)->value > (*a)->next->value)
 			sa(a);
 	}
-	else if (size <= 5)
-	{
-		sort_small(a, b);
-	}
+	else if (size == 3)
+		sort_three(a);
+	else if (size == 4 || size == 5)
+		sort_small(a, b, size);
 	else
-	{
 		radix_sort(a, b, size);
-	}
 }
 
 /* -------------------------

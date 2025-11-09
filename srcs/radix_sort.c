@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:25:00 by homura            #+#    #+#             */
-/*   Updated: 2025/11/08 18:39:57 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/09 22:05:52 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ void	radix_sort(t_node **a, t_node **b, int size)
 {
 	int	max;
 	int	max_bits;
-	int	i;
+	int	bit;
 
 	max = get_max(*a);
 	max_bits = get_max_bits(max);
-	i = 0;
-	while (i < max_bits)
+	bit = 0;
+	while (bit < max_bits)
 	{
-		sort_by_bit(a, b, i, size);
-		i++;
+		sort_by_bit(a, b, bit, size);
+		bit++;
 	}
 }

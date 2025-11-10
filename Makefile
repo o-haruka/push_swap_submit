@@ -6,7 +6,7 @@
 #    By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/08 17:49:33 by homura            #+#    #+#              #
-#    Updated: 2025/11/08 17:49:35 by homura           ###   ########.fr        #
+#    Updated: 2025/11/10 21:18:56 by homura           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ CFLAGS		= -Wall -Werror -Wextra -g
 
 SRC_PATH	= srcs
 SRC			= main.c \
-			operations.c \
+			operation_push.c \
+			operation_rotate.c \
+			operation_rrotate.c \
+			operation_swap.c \
 			error.c \
 			free.c \
 			stack_utils.c \
@@ -50,7 +53,7 @@ $(NAME) : $(OBJS)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INCS)
 	@ mkdir -p $(OBJ_PATH)
-	@ $(CC) $(CFLAGS) -o $@ -c $< -I $(INCS)
+	@ $(CC) $(CFLAGS) -o $@ -c $< -I $(INC_PATH)
 
 clean:
 	@ make clean -C $(LIB_PATH)

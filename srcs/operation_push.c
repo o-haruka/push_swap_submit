@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_push.c                                  :+:      :+:    :+:   */
+/*   operation_push.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 16:45:00 by homura            #+#    #+#             */
-/*   Updated: 2025/11/10 17:13:48 by homura           ###   ########.fr       */
+/*   Created: 2025/11/10 18:39:35 by homura            #+#    #+#             */
+/*   Updated: 2025/11/10 19:01:22 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include "../libft/stdio/ft_printf/ft_printf.h"
 
 void	pb(t_node **a, t_node **b)
 {

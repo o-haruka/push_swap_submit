@@ -6,19 +6,14 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:52:53 by homura            #+#    #+#             */
-/*   Updated: 2025/11/09 21:23:01 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/10 19:01:23 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 #include "../libft/includes/libft.h"
-#include "../libft/stdio/ft_printf/ft_printf.h"
 #include <stdlib.h>
 
-/* -------------------------
-   main整頓用関数
-   ------------------------- */
-// int配列からスタックAを逆順で初期化
 void	init_stack_a(t_node **a, int *arr, int size)
 {
 	int	j;
@@ -31,10 +26,9 @@ void	init_stack_a(t_node **a, int *arr, int size)
 	}
 }
 
-// ソート処理を分岐して実行
 void	do_sort(t_node **a, t_node **b, int size)
 {
-	if (size <= 1)
+	if (size <= 1 || is_sorted(*a))
 		return ;
 	else if (size == 2)
 	{
@@ -49,9 +43,6 @@ void	do_sort(t_node **a, t_node **b, int size)
 		radix_sort(a, b, size);
 }
 
-/* -------------------------
-   main
-   ------------------------- */
 int	main(int argc, char **argv)
 {
 	t_node	*a;

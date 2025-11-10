@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:20:00 by homura            #+#    #+#             */
-/*   Updated: 2025/11/09 21:46:35 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/10 20:53:40 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,35 @@ static void	move_min_to_top(t_node **a, int sz)
 
 void	sort_small(t_node **a, t_node **b, int size)
 {
-	// サイズ5: 最小値2つを移動
 	if (size == 5)
 	{
 		move_min_to_top(a, size);
 		pb(a, b);
-		move_min_to_top(a, size - 1);  // 1つ移動後なのでサイズ-1
+		move_min_to_top(a, size - 1);
 		pb(a, b);
 	}
-	// サイズ4: 最小値1つを移動
 	else if (size == 4)
 	{
 		move_min_to_top(a, size);
 		pb(a, b);
 	}
-	
-	// 残った3要素をソート
 	sort_three(a);
-	
-	// スタックBの要素を戻す
 	while (*b)
 		pa(a, b);
+}
+
+int	is_sorted(t_node *a)
+{
+	t_node	*cur;
+
+	if (!a)
+		return (1);
+	cur = a;
+	while (cur->next)
+	{
+		if (cur->value > cur->next->value)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
 }

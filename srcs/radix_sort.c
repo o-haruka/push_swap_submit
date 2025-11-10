@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:25:00 by homura            #+#    #+#             */
-/*   Updated: 2025/11/09 22:05:52 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/10 16:11:47 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	get_max(t_node *a)
 	return (max);
 }
 
-/* O(n^2) だが n<=500 なので十分 */
 void	index_stack(t_node *a, int *arr, int size)
 {
 	int	i;

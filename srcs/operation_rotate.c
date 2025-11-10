@@ -1,66 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_stack_a.c                               :+:      :+:    :+:   */
+/*   operation_rotate.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 16:45:00 by homura            #+#    #+#             */
-/*   Updated: 2025/11/10 17:13:51 by homura           ###   ########.fr       */
+/*   Created: 2025/11/10 18:27:39 by homura            #+#    #+#             */
+/*   Updated: 2025/11/10 19:01:22 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include "../libft/stdio/ft_printf/ft_printf.h"
 
-void	sa(t_node **a)
+static void	rotate(t_node **stack)
 {
 	t_node	*first;
-	t_node	*second;
+	t_node	*cur;
 
-	if (!*a || !(*a)->next)
+	if (!*stack || !(*stack)->next)
 		return ;
-	first = *a;
-	second = (*a)->next;
-	first->next = second->next;
-	second->next = first;
-	*a = second;
-	ft_printf("sa\n");
+	first = *stack;
+	cur = *stack;
+	while (cur->next)
+		cur = cur->next;
+	*stack = first->next;
+	first->next = NULL;
+	cur->next = first;
 }
 
 void	ra(t_node **a)
 {
-	t_node	*first;
-	t_node	*cur;
-
-	if (!*a || !(*a)->next)
-		return ;
-	first = *a;
-	cur = *a;
-	while (cur->next)
-		cur = cur->next;
-	*a = first->next;
-	first->next = NULL;
-	cur->next = first;
+	rotate(a);
 	ft_printf("ra\n");
 }
 
-void	rra(t_node **a)
+void	rb(t_node **b)
 {
-	t_node	*cur;
-	t_node	*prev;
+	rotate(b);
+	ft_printf("rb\n");
+}
 
-	if (!*a || !(*a)->next)
-		return ;
-	cur = *a;
-	prev = NULL;
-	while (cur->next)
-	{
-		prev = cur;
-		cur = cur->next;
-	}
-	prev->next = NULL;
-	cur->next = *a;
-	*a = cur;
-	ft_printf("rra\n");
+void	rr(t_node **a, t_node **b)
+{
+	rotate(a);
+	rotate(b);
+	ft_printf("rr\n");
 }

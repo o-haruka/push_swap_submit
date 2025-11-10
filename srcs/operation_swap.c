@@ -1,53 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   operation_swap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 17:53:05 by homura            #+#    #+#             */
-/*   Updated: 2025/11/10 16:11:46 by homura           ###   ########.fr       */
+/*   Created: 2025/11/10 18:22:22 by homura            #+#    #+#             */
+/*   Updated: 2025/11/10 19:01:24 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdlib.h>
 
-void	push_front(t_node **stack, int value)
-{
-	t_node	*new;
-
-	new = malloc(sizeof(t_node));
-	if (!new)
-		exit(1);
-	new->value = value;
-	new->next = *stack;
-	*stack = new;
-}
-
-int	pop_front(t_node **stack)
+static void	swap(t_node **stack)
 {
 	t_node	*tmp;
-	int		val;
 
-	if (!*stack)
-		return (0);
+	if (!*stack || !(*stack)->next)
+		return ;
 	tmp = *stack;
-	val = tmp->value;
-	*stack = tmp->next;
-	free(tmp);
-	return (val);
+	*stack = (*stack)->next;
+	tmp->next = (*stack)->next;
+	(*stack)->next = tmp;
 }
 
-int	list_size(t_node *a)
+void	sa(t_node **a)
 {
-	int	n;
+	swap(a);
+	ft_printf("sa\n");
+}
 
-	n = 0;
-	while (a)
-	{
-		n++;
-		a = a->next;
-	}
-	return (n);
+void	sb(t_node **b)
+{
+	swap(b);
+	ft_printf("sb\n");
+}
+
+void	ss(t_node **a, t_node **b)
+{
+	swap(a);
+	swap(b);
+	ft_printf("ss\n");
 }

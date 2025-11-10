@@ -1,58 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_stack_b.c                               :+:      :+:    :+:   */
+/*   operation_rrotate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 16:45:00 by homura            #+#    #+#             */
-/*   Updated: 2025/11/10 17:13:52 by homura           ###   ########.fr       */
+/*   Created: 2025/11/10 18:40:59 by homura            #+#    #+#             */
+/*   Updated: 2025/11/10 19:01:24 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include "../libft/stdio/ft_printf/ft_printf.h"
 
-void	sb(t_node **b)
-{
-	t_node	*first;
-	t_node	*second;
-
-	if (!*b || !(*b)->next)
-		return ;
-	first = *b;
-	second = (*b)->next;
-	first->next = second->next;
-	second->next = first;
-	*b = second;
-	ft_printf("sb\n");
-}
-
-void	rb(t_node **b)
-{
-	t_node	*first;
-	t_node	*cur;
-
-	if (!*b || !(*b)->next)
-		return ;
-	first = *b;
-	cur = *b;
-	while (cur->next)
-		cur = cur->next;
-	*b = first->next;
-	first->next = NULL;
-	cur->next = first;
-	ft_printf("rb\n");
-}
-
-void	rrb(t_node **b)
+static void	reverse_rotate(t_node **stack)
 {
 	t_node	*cur;
 	t_node	*prev;
 
-	if (!*b || !(*b)->next)
+	if (!*stack || !(*stack)->next)
 		return ;
-	cur = *b;
+	cur = *stack;
 	prev = NULL;
 	while (cur->next)
 	{
@@ -60,7 +27,25 @@ void	rrb(t_node **b)
 		cur = cur->next;
 	}
 	prev->next = NULL;
-	cur->next = *b;
-	*b = cur;
+	cur->next = *stack;
+	*stack = cur;
+}
+
+void	rra(t_node **a)
+{
+	reverse_rotate(a);
+	ft_printf("rra\n");
+}
+
+void	rrb(t_node **b)
+{
+	reverse_rotate(b);
 	ft_printf("rrb\n");
+}
+
+void	rrr(t_node **a, t_node **b)
+{
+	reverse_rotate(a);
+	reverse_rotate(b);
+	ft_printf("rrr\n");
 }

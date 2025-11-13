@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 18:08:18 by homura            #+#    #+#             */
-/*   Updated: 2025/11/10 16:11:48 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/13 16:38:51 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ static int	convert_split_to_array(char **split, int **arr, int size)
 
 	*arr = malloc(sizeof(int) * size);
 	if (!*arr)
-		return (1);
+		return (MALLOC_ERROR);
 	i = 0;
 	while (i < size)
 	{
 		(*arr)[i] = ft_atoi(split[i]);
 		i++;
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 static int	parse_args_split(char *arg, int **arr, int *size)
@@ -46,20 +46,20 @@ static int	parse_args_split(char *arg, int **arr, int *size)
 
 	split = ft_split(arg, ' ');
 	if (!split)
-		return (1);
+		return (MALLOC_ERROR);
 	*size = get_split_size(split);
 	if (*size == 0)
 	{
 		free_split_array(split);
-		return (1);
+		return (INVALID_INPUT);
 	}
 	if (convert_split_to_array(split, arr, *size) == 1)
 	{
 		free_split_array(split);
-		return (1);
+		return (MALLOC_ERROR);
 	}
 	free_split_array(split);
-	return (0);
+	return (SUCCESS);
 }
 
 int	parse_args(int argc, char **argv, int **arr, int *size)
@@ -71,12 +71,12 @@ int	parse_args(int argc, char **argv, int **arr, int *size)
 	*size = argc - 1;
 	*arr = malloc(sizeof(int) * (*size));
 	if (!*arr)
-		return (1);
+		return (MALLOC_ERROR);
 	i = 0;
 	while (i < *size)
 	{
 		(*arr)[i] = ft_atoi(argv[i + 1]);
 		i++;
 	}
-	return (0);
+	return (SUCCESS);
 }

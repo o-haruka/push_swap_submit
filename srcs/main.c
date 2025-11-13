@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:52:53 by homura            #+#    #+#             */
-/*   Updated: 2025/11/10 19:01:23 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/13 16:43:59 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	if (check_args(argc, argv) == 1)
+	if (check_args(argc, argv) == ERROR)
 		error_exit();
 	a = NULL;
 	b = NULL;
-	if (parse_args(argc, argv, &arr, &size) == 1)
-		return (1);
-	if (check_duplicate(arr, size) == 1)
+	if (parse_args(argc, argv, &arr, &size) == ERROR)
+		// return (1);
+		error_exit();
+	if (check_duplicate(arr, size) == ERROR)
 		error_exit();
 	init_stack_a(&a, arr, size);
 	index_stack(a, arr, size);
@@ -66,5 +67,5 @@ int	main(int argc, char **argv)
 	free(arr);
 	free_stack(&a);
 	free_stack(&b);
-	return (0);
+	return (SUCCESS);
 }

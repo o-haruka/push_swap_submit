@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:49:45 by homura            #+#    #+#             */
-/*   Updated: 2025/11/10 20:53:42 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/13 16:35:21 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <stddef.h>
 # include "../libft/stdio/ft_printf/ft_printf.h"
+
+#define SUCCESS			0
+#define ERROR			1
+#define MALLOC_ERROR	1
+#define PARSE_ERROR		1
+#define INVALID_INPUT	1
 
 typedef struct s_node
 {

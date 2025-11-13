@@ -6,7 +6,7 @@
 #    By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/08 17:49:33 by homura            #+#    #+#              #
-#    Updated: 2025/11/10 21:22:41 by homura           ###   ########.fr        #
+#    Updated: 2025/11/13 18:21:15 by homura           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,4 +73,62 @@ tester: all
 leaks: all
 	@ leaks -atExit -- ./push_swap 3 2 1 5 9 0
 
-.PHONY : all clean fclean re
+# ランダムな数値でテストを実行(mac)
+# random: all
+# 	@ if [ -z "$(NUM)" ]; then \
+# 		echo "使用法: make random NUM=数値の個数"; \
+# 		echo "例: make random NUM=5"; \
+# 		exit 1; \
+# 	fi; \
+# 	ARG=$$(seq 0 1000 | sort -R | head -$(NUM) | tr '\n' ' '); \
+# 	echo "テスト中: $$ARG"; \
+# 	if command -v ./checker > /dev/null 2>&1; then \
+# 		echo "結果:"; \
+# 		echo "$$ARG" | xargs ./push_swap | ./checker $$ARG; \
+# 	else \
+# 		echo "checkerが見つかりません。push_swapのみ実行:"; \
+# 		echo "$$ARG" | xargs ./push_swap; \
+# 	fi
+
+random: all
+	@ if [ -z "$(NUM)" ]; then \
+		echo "使用法: make random NUM=数値の個数"; \
+		echo "例: make random NUM=5"; \
+		exit 1; \
+	fi; \
+	RANGE=$$(($(NUM) * 3)); \
+	if [ $$RANGE -lt 1000 ]; then RANGE=1000; fi; \
+	if command -v shuf > /dev/null 2>&1; then \
+		ARG=$$(shuf -i 0-$$RANGE -n $(NUM) | tr '\n' ' '); \
+	elif command -v jot > /dev/null 2>&1; then \
+		ARG=$$(seq 0 $$RANGE | sort -R | head -$(NUM) | tr '\n' ' '); \
+	else \
+		RANGE_SIZE=$$RANGE; \
+		if [ $$RANGE_SIZE -lt 100 ]; then RANGE_SIZE=100; fi; \
+		ARG=""; \
+		COUNT=0; \
+		while [ $$COUNT -lt $(NUM) ]; do \
+			NUM_VAL=$$((RANDOM % $$RANGE_SIZE)); \
+			if ! echo "$$ARG" | grep -q "\b$$NUM_VAL\b"; then \
+				ARG="$$ARG $$NUM_VAL"; \
+				COUNT=$$((COUNT + 1)); \
+			fi; \
+		done; \
+		ARG=$$(echo $$ARG | xargs); \
+	fi; \
+	echo "テスト中: $$ARG"; \
+	if command -v ./checker_linux > /dev/null 2>&1; then \
+		echo "結果:"; \
+		echo "$$ARG" | xargs ./push_swap | ./checker_linux $$ARG; \
+	elif command -v ./checker_Mac > /dev/null 2>&1; then \
+		echo "結果:"; \
+		echo "$$ARG" | xargs ./push_swap | ./checker_Mac $$ARG; \
+	elif command -v ./checker > /dev/null 2>&1; then \
+		echo "結果:"; \
+		echo "$$ARG" | xargs ./push_swap | ./checker $$ARG; \
+	else \
+		echo "checkerが見つかりません。push_swapのみ実行:"; \
+		echo "$$ARG" | xargs ./push_swap; \
+	fi
+
+.PHONY : all clean fclean re random

@@ -6,7 +6,7 @@
 /*   By: homura <homura@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:52:44 by homura            #+#    #+#             */
-/*   Updated: 2025/11/10 16:09:30 by homura           ###   ########.fr       */
+/*   Updated: 2025/11/13 17:04:19 by homura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	check_args(int argc, char **argv)
 {
 	if (argc == 2)
 	{
-		if (ft_isstrspace(argv[1]) == 1)
-			return (1);
+		if (ft_isstrspace(argv[1]))
+			return (ERROR);
 		return (check_one_commandline(argv));
 	}
 	else
@@ -87,10 +87,10 @@ int	check_duplicate(int *args, size_t counter)
 		while (j < counter)
 		{
 			if (args[i] == args[j])
-				return (1);
+				return (ERROR);
 			j++;
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCESS);
 }

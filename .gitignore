@@ -1,2 +1,6 @@
 checker
 push_swap_tester
+*.o
+*.out
+*.a
+push_swap
